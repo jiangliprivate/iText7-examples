@@ -9,6 +9,7 @@ import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 
 
@@ -38,7 +39,8 @@ public class C01E01_HelloWorld {
         // Initialize document
         Document document = new Document(pdf);
         //Add paragraph to the document
-        document.add(new Paragraph("Hello World!").setPadding(0).setMargin(0).setFixedLeading(0));
+        Text lineTxt = new Text("Hello World!").setHorizontalScaling(9.6f * 2).setHorizontalScaling(0.5f);
+        document.add(new Paragraph(lineTxt).setPadding(9.6f).setMargin(0).setFixedLeading(0));
         Table table = new Table(3);
         table.addCell(getCell("Text to the left", TextAlignment.LEFT));
         table.addCell(getCell("Text in the middle", TextAlignment.CENTER));

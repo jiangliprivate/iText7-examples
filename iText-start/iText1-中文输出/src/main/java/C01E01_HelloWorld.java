@@ -9,6 +9,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Text;
 
 
 import java.io.File;
@@ -44,6 +45,10 @@ public class C01E01_HelloWorld {
         //Add paragraph to the document
         document.add(new Paragraph("hellos你好").setFont(f2));
        document.add(new Paragraph("hellos你好").setFont(f3));
+        Text lineTxt = new Text("客户名称:华大").setFontSize(9.6f * 2);
+        Text lineTxt1 = new Text("客户名称:华大").setFontSize(9.6f * 2).setHorizontalScaling(0.5f);
+        document.add(new Paragraph(lineTxt).setFont(f3));
+        document.add(new Paragraph(lineTxt1).setFont(f3));
 
 
         //Close document

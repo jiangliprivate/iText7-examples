@@ -38,27 +38,41 @@ public class C01E01_HelloWorld {
 
         // Initialize document
         Document document = new Document(pdf);
+        document.setTextAlignment(TextAlignment.CENTER);
         //Add paragraph to the document
-        Text lineTxt = new Text("Hello World!").setHorizontalScaling(9.6f * 2).setHorizontalScaling(0.5f);
-        document.add(new Paragraph(lineTxt).setPadding(9.6f).setMargin(0).setFixedLeading(0));
-        Table table = new Table(3);
-        table.addCell(getCell("Text to the left", TextAlignment.LEFT));
-        table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
-        table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
-        table.setPadding(0);
-        table.setMargin(0);
-        document.add(table);
+        Text lineTxt = new Text("Hello World!").setFontSize(9.6f * 2).setHorizontalScaling(0.5f);
+        document.add(new Paragraph(lineTxt).setFontSize(9.6f).setMargin(0).setFixedLeading(0));
+        {
+            Table table = new Table(3);
+            table.addCell(getCell("Text to the left", TextAlignment.LEFT));
+            table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
+            table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
+            table.setPadding(0);
+            table.setMargin(0);
+            document.add(table);
+        }
+        {
+            Table table = new Table(3);
+            table.addCell(getCell("", TextAlignment.LEFT));
+            table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
+            table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
+            table.setPadding(0);
+            table.setMargin(0);
+            document.add(table);
+        }
+
 
         //Close document
         document.close();
     }
 
     public Cell getCell(String text, TextAlignment alignment) {
-        Cell cell = new Cell().add(new Paragraph(text).setFixedLeading(0));
+        Cell cell = new Cell().add(new Paragraph(text).setFixedLeading(9.6f));
         cell.setPadding(0);
+        cell.setMargins(0,0,12f-9.6f,0);
         cell.setTextAlignment(alignment);
         cell.setBorder(Border.NO_BORDER);
-        cell.setMargin(0);
+        cell.setFontSize(9.6f);
         return cell;
     }
 }

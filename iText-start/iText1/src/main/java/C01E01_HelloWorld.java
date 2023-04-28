@@ -5,7 +5,11 @@
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
 
 
 import java.io.File;
@@ -33,11 +37,26 @@ public class C01E01_HelloWorld {
 
         // Initialize document
         Document document = new Document(pdf);
-
         //Add paragraph to the document
-        document.add(new Paragraph("Hello World!"));
+        document.add(new Paragraph("Hello World!").setPadding(0).setMargin(0).setFixedLeading(0));
+        Table table = new Table(3);
+        table.addCell(getCell("Text to the left", TextAlignment.LEFT));
+        table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
+        table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
+        table.setPadding(0);
+        table.setMargin(0);
+        document.add(table);
 
         //Close document
         document.close();
+    }
+
+    public Cell getCell(String text, TextAlignment alignment) {
+        Cell cell = new Cell().add(new Paragraph(text).setFixedLeading(0));
+        cell.setPadding(0);
+        cell.setTextAlignment(alignment);
+        cell.setBorder(Border.NO_BORDER);
+        cell.setMargin(0);
+        return cell;
     }
 }

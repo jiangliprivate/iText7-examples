@@ -46,16 +46,17 @@ public class C01E01_HelloWorld {
         Text lineTxt = new Text("Hello World!").setFontSize(9.6f * 2).setHorizontalScaling(0.5f);
         document.add(new Paragraph(lineTxt).setFontSize(9.6f).setMargin(0).setFixedLeading(0));
         {
-            Table table = new Table(3);
-            table.addCell(getCell("Text to the left", TextAlignment.LEFT));
-            table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
-            table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
+            Table table = new Table(new float[]{1,1,1});
+            table.addHeaderCell(getCell("Text to the left left left left left left left left left left left left left", TextAlignment.LEFT));
+            //table.addHeaderCell(getCell("Text in the middle middle middle middle middle middle middle middle middle ", TextAlignment.CENTER));
+            table.addHeaderCell(getCell("Text in the middle", TextAlignment.CENTER));
+            table.addHeaderCell(getCell("Text to the right right right right right right right right right right right ", TextAlignment.RIGHT));
             table.setPadding(0);
             table.setMargin(0);
             document.add(table);
         }
         {
-            Table table = new Table(3);
+            Table table = new Table(new float[]{1,1,1});
             table.addCell(getCell("", TextAlignment.LEFT));
             table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
             table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
@@ -71,12 +72,13 @@ public class C01E01_HelloWorld {
     }
 
     public Cell getCell(String text, TextAlignment alignment) {
-        Cell cell = new Cell().add(new Paragraph(text).setFixedLeading(9.6f));
+        Cell cell = new Cell(1,1).add(new Paragraph(text).setFixedLeading(9.6f).setKeepWithNext(false));
         cell.setPadding(0);
-        cell.setMargins(0,0,12f-9.6f,0);
+        //cell.setMargins(0,0,12f-9.6f,0);
         cell.setTextAlignment(alignment);
         cell.setBorder(Border.NO_BORDER);
         cell.setFontSize(9.6f);
+        cell.setHeight((12f-9.6f)*2+9.6f);
         return cell;
     }
 }

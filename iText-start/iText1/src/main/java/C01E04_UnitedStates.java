@@ -1,6 +1,7 @@
 /**
  * Created by CuteKe on 2017/7/10.
  */
+
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -11,6 +12,9 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,17 +49,25 @@ public class C01E04_UnitedStates {
 
         PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA);
         PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
-        Table table = new Table(new float[]{4, 1, 3, 4, 3, 3, 3, 3, 1});
-        table.setWidthPercent(100);
-        BufferedReader br = new BufferedReader(new FileReader(DATA));
-        String line = br.readLine();
-        process(table, line, bold, true);
-        while ((line = br.readLine()) != null) {
-            process(table, line, font, false);
-        }
-        br.close();
-        document.add(table);
+        {
+            Table table = new Table(new float[]{4, 1, 3, 4, 3, 3, 3, 3, 1});
+            table.setWidthPercent(100);
+            table.setFixedLayout();
+            BufferedReader br = new BufferedReader(new FileReader(DATA));
+            String line = br.readLine();
+            process(table, line, bold, true);
+            while ((line = br.readLine()) != null) {
+                process(table, line, font, false);
+            }
+            br.close();
 
+            document.add(table);
+        }
+
+        {
+            Table table = new Table(new float[]{1});
+            table.setWidthPercent(100);
+        }
         //Close document
         document.close();
     }
@@ -64,9 +76,26 @@ public class C01E04_UnitedStates {
         StringTokenizer tokenizer = new StringTokenizer(line, ";");
         while (tokenizer.hasMoreTokens()) {
             if (isHeader) {
-                table.addHeaderCell(new Cell().add(new Paragraph(tokenizer.nextToken()).setFont(font)));
+                Cell cell = new Cell();
+                cell.setTextAlignment(TextAlignment.CENTER);
+                //cell.setPaddings(12f-9.6f,0,12f-9.6f,0);
+                cell.setHeight((12f - 9.6f) * 2 + 9.6f);
+                cell.setVerticalAlignment(VerticalAlignment.MIDDLE);
+                cell.setMargin(0);
+                Text text = new Text(tokenizer.nextToken()).setFont(font).setFontSize(9.6f);
+                //cell.setMargins(12f-9.6f,0,12f-9.6f,0);
+                table.addHeaderCell(cell.add(new Paragraph(text).setFixedLeading(9.6f).setPadding(0).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE)));
             } else {
-                table.addCell(new Cell().add(new Paragraph(tokenizer.nextToken()).setFont(font)));
+                Cell cell = new Cell();
+                cell.setVerticalAlignment(VerticalAlignment.MIDDLE);
+                //cell.setPaddings(12f-9.6f,0,12f-9.6f,0);
+                cell.setHeight((12f - 9.6f) * 2 + 9.6f);
+                cell.setTextAlignment(TextAlignment.CENTER);
+
+                cell.setMargin(0);
+                //cell.setMargins(12f-9.6f,0,12f-9.6f,0);
+                Text text = new Text(tokenizer.nextToken() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").setFont(font).setFontSize(9.6f);
+                table.addCell(cell.add(new Paragraph(text).setFixedLeading(9.6f).setPadding(0).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE)));
             }
         }
     }

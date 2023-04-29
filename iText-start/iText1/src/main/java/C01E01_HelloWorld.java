@@ -2,10 +2,13 @@
  * This example is part of the iText 7 tutorial.
  */
 
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
@@ -37,7 +40,7 @@ public class C01E01_HelloWorld {
         PdfDocument pdf = new PdfDocument(writer);
 
         // Initialize document
-        Document document = new Document(pdf);
+        Document document = new Document(pdf, PageSize.A4);
         document.setTextAlignment(TextAlignment.CENTER);
         //Add paragraph to the document
         Text lineTxt = new Text("Hello World!").setFontSize(9.6f * 2).setHorizontalScaling(0.5f);
@@ -56,6 +59,7 @@ public class C01E01_HelloWorld {
             table.addCell(getCell("", TextAlignment.LEFT));
             table.addCell(getCell("Text in the middle", TextAlignment.CENTER));
             table.addCell(getCell("Text to the right", TextAlignment.RIGHT));
+            table.setBorder(new SolidBorder(Color.BLACK, 0.5f));
             table.setPadding(0);
             table.setMargin(0);
             document.add(table);

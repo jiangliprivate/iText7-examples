@@ -94,7 +94,7 @@ public class C01E04_UnitedStates {
 
                 cell.setMargin(0);
                 //cell.setMargins(12f-9.6f,0,12f-9.6f,0);
-                Text text = new Text(tokenizer.nextToken() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").setFont(font).setFontSize(9.6f);
+                Text text = new Text(tokenizer.nextToken() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").setFont(font).setFontSize(9.6f).setCharacterSpacing();
                 table.addCell(cell.add(new Paragraph(text).setFixedLeading(9.6f).setPadding(0).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE)));
             }
         }

@@ -9,6 +9,8 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
@@ -65,8 +67,28 @@ public class C01E04_UnitedStates {
         }
 
         {
-            Table table = new Table(new float[]{1});
+            Table table = new Table(100);
             table.setWidthPercent(100);
+            {
+                table.addCell(getCell(30, "30"));
+                table.addCell(getCell(40, "40"));
+                table.addCell(getCell(30, "30"));
+            }
+            {
+                table.addCell(getCell(50, "50"));
+                table.addCell(getCell(50, "50"));
+            }
+            {
+                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER).setBorderLeft(new SolidBorder(0.4f)));
+                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER));
+                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER));
+                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER));
+                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER).setBorderRight(new SolidBorder(0.4f)));
+            }
+            {
+                table.addCell(getCell(100, "100"));
+            }
+            document.add(table);
         }
         //Close document
         document.close();
@@ -94,9 +116,24 @@ public class C01E04_UnitedStates {
 
                 cell.setMargin(0);
                 //cell.setMargins(12f-9.6f,0,12f-9.6f,0);
-                Text text = new Text(tokenizer.nextToken() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").setFont(font).setFontSize(9.6f).setCharacterSpacing();
+                Text text = new Text(tokenizer.nextToken() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").setFont(font).setFontSize(9.6f);
                 table.addCell(cell.add(new Paragraph(text).setFixedLeading(9.6f).setPadding(0).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE)));
             }
         }
     }
+
+    private Cell getCell(int columnWidth, String str) {
+        Cell cell = new Cell(1, columnWidth);
+        cell.setVerticalAlignment(VerticalAlignment.MIDDLE);
+        //cell.setPaddings(12f-9.6f,0,12f-9.6f,0);
+        cell.setHeight((12f - 9.6f) * 2 + 9.6f);
+        cell.setTextAlignment(TextAlignment.CENTER);
+
+        cell.setMargin(0);
+        //cell.setMargins(12f-9.6f,0,12f-9.6f,0);
+        Text text = new Text(str).setFontSize(9.6f);
+        //Text text = new Text(str + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").setFontSize(9.6f);
+        return cell.add(new Paragraph(text).setFixedLeading(9.6f).setPadding(0).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE));
+    }
+
 }

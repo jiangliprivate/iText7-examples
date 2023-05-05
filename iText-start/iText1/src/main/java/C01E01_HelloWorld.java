@@ -102,7 +102,7 @@ public class C01E01_HelloWorld {
         return cell;
     }
 
-    public Cell getCell(String text, TextAlignment alignment) {
+/*    public Cell getCell(String text, TextAlignment alignment) {
         Cell cell = new Cell(1,1).add(new Paragraph(text).setFixedLeading(9.6f));
         cell.setPadding(0);
         //cell.setMargins(0,0,12f-9.6f,0);
@@ -111,5 +111,5 @@ public class C01E01_HelloWorld {
         cell.setFontSize(9.6f);
         cell.setHeight((12f-9.6f)*2+9.6f);
         return cell;
-    }
+    }*/
 }

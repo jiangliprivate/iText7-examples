@@ -79,8 +79,8 @@ public class C01E04_UnitedStates {
                 table.addCell(getCell(50, "50"));
             }
             {
-                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER).setBorderLeft(new SolidBorder(0.4f)));
-                table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER));
+                table.addCell(getCell(20, "2AAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBB").setBorder(Border.NO_BORDER).setBorderLeft(new SolidBorder(0.4f)));
+                table.addCell(getCell(20, "2SSSSSS").setBorder(Border.NO_BORDER));
                 table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER));
                 table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER));
                 table.addCell(getCell(20, "2").setBorder(Border.NO_BORDER).setBorderRight(new SolidBorder(0.4f)));

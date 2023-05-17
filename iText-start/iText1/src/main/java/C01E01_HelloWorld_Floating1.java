@@ -12,6 +12,7 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Div;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.layout.LayoutPosition;
 import com.itextpdf.layout.property.*;
 
 import java.io.File;
@@ -23,15 +24,15 @@ import java.nio.file.Paths;
 /**
  * Simple Hello World example.
  */
+
 /**
- *
  * 方法二:使用Canvas-低级API
- *     这种方法主要是利用了Rectangle和Canvas相结合来在特定位置添加文本，我们直接来看如下代码：
- *
+ * 这种方法主要是利用了Rectangle和Canvas相结合来在特定位置添加文本，我们直接来看如下代码：
+ * <p>
  * PdfPage page = pdf.addNewPage();
  * PdfCanvas pdfCanvas = new PdfCanvas(page);
  * Rectangle[] columns = {new Rectangle(6, 650, 100, 30),
- *         new Rectangle(50, 500, 100, 100),};  //几个Rectangle对应几个位置
+ * new Rectangle(50, 500, 100, 100),};  //几个Rectangle对应几个位置
  * pdfCanvas.rectangle(columns[0]);
  * pdfCanvas.stroke();
  * Canvas canvas = new Canvas(pdfCanvas, pdf, columns[0]);
@@ -46,8 +47,8 @@ import java.nio.file.Paths;
  * 7
  * 8
  * 9
- *     步骤如下：
- *
+ * 步骤如下：
+ * <p>
  * 根据合同中留空的位置设计相应个数的Rectangle
  * 用第一个矩形设置当前pdfCanvas画布的位置，表明要在这个矩形里面添加内容
  * 调用stroke()函数，显示这个矩形，当然，你可以不掉用这个函数，那就不会显示这个矩形。
@@ -57,7 +58,7 @@ import java.nio.file.Paths;
  * ————————————————
  * 版权声明：本文为CSDN博主「CuteXiaoKe」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
  * 原文链接：https://blog.csdn.net/u012397189/article/details/78953637
- * */
+ */
 public class C01E01_HelloWorld_Floating1 {
 
     public static final String DEST = "results/chapter01/hello_world_floating1.pdf";
@@ -141,20 +142,25 @@ public class C01E01_HelloWorld_Floating1 {
         System.out.println("y = " + y + "x = " + x);
         apple.setProperty(Property.FLOAT, FloatPropertyValue.RIGHT);
         Div cell = new Div();
-        cell.setWidth();
-        cell.setHeight()
-        cell.setFillAvailableArea(true);
-        cell.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        cell.add(apple);
-        cell.setFixedPosition(x, y, 100);
+        cell.setWidth(ps.getWidth());
+        cell.setHeight(ps.getHeight());
 
-        //apple.setFixedPosition(x, y, 100);
         String articleApple = new String(Files.readAllBytes(Paths.get(APPLE_1_TXT)), StandardCharsets.UTF_8);
+       // cell.setFixedPosition(x, y, 100);
 
-
-        document.add(cell).add(new Paragraph()
+        apple.setProperty(Property.POSITION, LayoutPosition.ABSOLUTE);
+        apple.setProperty(Property.X, x);
+        apple.setProperty(Property.Y, y);
+        apple.setProperty(Property.WIDTH, UnitValue.createPointValue(100));
+        cell.add(apple);
+        cell.add(new Paragraph()
                 .setFontSize(10)
                 .add(articleApple));
+       // apple.setFixedPosition(x, y, 100);
+
+        document.add(cell)/*.add(new Paragraph()
+                .setFontSize(10)
+                .add(articleApple))*/;
         //Close document
         document.close();
     }

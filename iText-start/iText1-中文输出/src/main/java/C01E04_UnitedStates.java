@@ -77,7 +77,7 @@ public class C01E04_UnitedStates {
         }
     }
     void func(){
-        Table table = new Table(UnitValue.createPercentArray(1)).useAllAvailableWidth();
+    /*    Table table = new Table(UnitValue.createPercentArray(1)).useAllAvailableWidth();
 
         for (int i = 0; i < 10; i++) {
             Cell cell;
@@ -104,6 +104,6 @@ public class C01E04_UnitedStates {
 
         doc.add(table);
 
-        doc.close();
+        doc.close();*/
     }
 }
